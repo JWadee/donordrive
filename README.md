@@ -13,3 +13,6 @@ npm i
 ## Usage
 
 from the root directory run
+```bash
+node index.js
+```
