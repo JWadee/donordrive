@@ -10,11 +10,11 @@ const validateEmail = (email) => {
 const validateForm = (name, email) =>{   
     // make sure name has text entered and email is valid
     if(name.length > 0 && validateEmail(email)){
-        return true
+        return true;
     }else{
-        return false
-    }
-}
+        return false;
+    };
+};
 
 // function to submit form to database
 const submitForm = (body) =>{
@@ -25,35 +25,34 @@ const submitForm = (body) =>{
         },
         body: JSON.stringify(body)
     }).then(res=>{
-        console.log("success")
+        console.log("success");
         // clear form
         document.getElementById("contactForm").reset();
     }).catch(err=>{
-        console.log(err)
+        console.log(err);
     });
-}
+};
 
 // add submission listener
 window.onload = () =>{
     const form = document.getElementById('contactForm');
     form.addEventListener('submit', function(e){
-
         // validate form 
-        const name = document.getElementById("fname").value
-        const email = document.getElementById("femail").value
+        const name = document.getElementById("fname").value;
+        const email = document.getElementById("femail").value;
         const isValid = validateForm(name, email);
-        // if valid -
+        // if valid - submit form for database entry and email confirmation 
         if(isValid){
             document.getElementById("errorMessage").style.display ="none";
             body = {
                 name: name,
                 email: email
-            }
-            submitForm(body)
+            };
+            submitForm(body);
         }else{
             // prevent submission
             e.preventDefault();
             document.getElementById("errorMessage").style.display ="inline";
-        }        
-    })
-}
+        };        
+    });
+};
