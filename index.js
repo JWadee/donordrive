@@ -17,20 +17,48 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// setup body parser and path
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(__dirname));
+
+// root path 
+const root = path.join(__dirname)
+
 
 // main page
 app.get('/', (req, res) => {
-    var options = {
-        root: path.join(__dirname)
-    };
-    res.sendFile('index.html', options, function(err){
+    res.sendFile('index.html', function(err){
         if(err){
             next(err)
         }
     })
 })
+
+// // styles
+// app.get('/style.css', function(req, res) {
+//     var options = {
+//         root: root
+//     };
+//     res.sendFile('styles.css', options, function(err){
+//         if(err){
+//             next(err)
+//         }
+//     })  
+// });
+
+
+// // script
+// app.get('/script.js', function(req, res) {
+//     var options = {
+//         root: root
+//     };
+//     res.sendFile('script.js', options, function(err){
+//         if(err){
+//             next(err)
+//         }
+//     })  
+// });
 
 app.post('/submit', (req, res) =>{
     // function to send email 

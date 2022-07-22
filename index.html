@@ -1,82 +1,29 @@
 <!DOCTYPE html>
 
 <html>
-    <!-- Javascript -->
-    <script type="text/javascript">
-        // function for email validation 
-        const validateEmail = (email) => {
-            let valid = String(email).toLowerCase().match(
-                /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-            );
-            return valid;
-        };
-
-        // function to validate form 
-        const validateForm = (name, email) =>{   
-            // make sure name has text entered and email is valid
-            if(name.length > 0 && validateEmail(email)){
-                return true
-            }else{
-                return false
-            }
-        }
-
-        // function to submit form to database
-        const submitForm = (body) =>{
-            fetch('/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify(body)
-            }).then(res=>{
-                console.log("success")
-                // clear form
-                document.getElementById("contactForm").reset();
-            }).catch(err=>{
-                console.log(err)
-            });
-        }
-
-        // add submission listener
-        window.onload = () =>{
-            const form = document.getElementById('contactForm');
-            form.addEventListener('submit', function(e){
-
-                // validate form 
-                const name = document.getElementById("fname").value
-                const email = document.getElementById("femail").value
-                const isValid = validateForm(name, email);
-                // if valid -
-                if(isValid){
-                    document.getElementById("errorMessage").style.display ="none";
-                    body = {
-                        name: name,
-                        email: email
-                    }
-                    submitForm(body)
-                }else{
-                    // prevent submission
-                    e.preventDefault();
-                    document.getElementById("errorMessage").style.display ="inline";
-                }        
-            })
-        }
-    </script>
-
     <head>
         <title>Contact Form</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+        <script type="text/javascript" src="/script.js"></script>
     </head>
     <body>
-        <h4>Contact Us</h4>
-        <form id="contactForm">
-            <label for="fname">Name: </label>
-            <input type="text" id="fname"><br>
-            <label for="femail">Email: </label>
-            <input type="email" id="femail"><br>
-            <input type="submit" value="Submit">
-        </form>
-        <br>
-        <p id="errorMessage" style="display: none;">Please make sure to enter your name and a valid email address</p>
+        <div id="content">
+            <h2>Contact Us Form</h4>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="fname">Name: </label>
+                    <input type="text" id="fname">
+                </div>
+    
+                <div class="form-group">
+                    <label for="femail">Email: </label>
+                    <input type="email" id="femail"><br>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" id="btnSubmit">
+                </div>
+            </form>
+            <div id="errorMessage" style="display: none;">Please make sure to enter your name and a valid email address</div>
+        </div>
     </body>
 </html>

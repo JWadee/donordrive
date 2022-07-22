@@ -1,0 +1,36 @@
+h2{
+    margin: 10px;
+}
+
+#content{
+    height: auto;
+    width: 500px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    padding: 15px;
+}
+.form-group{
+    margin-bottom: 15px;
+}
+
+input{
+    height: 25px;
+    width:250px;
+    border-radius: 10px;
+    border: 1px solid grey
+}
+
+#errorMessage{
+    background-color: pink;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#btnSubmit{
+    width: 60%;
+    color: white;
+    background-color: black;
+    height: 35px;
+}
